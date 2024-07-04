@@ -2,7 +2,7 @@
         class="dcat-admin-body sidebar-mini layout-fixed {{ $configData['body_class']}} {{ $configData['sidebar_class'] }}
         {{ $configData['navbar_class'] === 'fixed-top' ? 'navbar-fixed-top' : '' }} " >
 
-<script>
+<script @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif >
     var Dcat = CreateDcat({!! Dcat\Admin\Admin::jsVariables() !!});
 </script>
 
@@ -39,7 +39,7 @@
 
 {!! Dcat\Admin\Admin::asset()->jsToHtml() !!}
 
-<script>Dcat.boot();</script>
+<script @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif>Dcat.boot();</script>
 
 </body>
 

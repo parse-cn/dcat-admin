@@ -27,7 +27,7 @@
 
 <body class="dcat-admin-body full-page {{ $configData['body_class'] }}">
 
-<script>
+<script @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif >
     var Dcat = CreateDcat({!! Dcat\Admin\Admin::jsVariables() !!});
 </script>
 
@@ -44,7 +44,7 @@
 
 {!! Dcat\Admin\Admin::asset()->jsToHtml() !!}
 
-<script>Dcat.boot();</script>
+<script @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif>Dcat.boot();</script>
 
 </body>
 </html>
