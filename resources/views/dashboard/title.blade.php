@@ -1,4 +1,4 @@
-<style>
+<style @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif>
     .dashboard-title .links {
         text-align: center;
         margin-bottom: 2.5rem;

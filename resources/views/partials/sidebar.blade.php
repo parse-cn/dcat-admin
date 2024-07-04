@@ -16,9 +16,9 @@
             @endif
 
             <div class="p-0 {{ $configData['horizontal_menu'] ? 'pl-1 pr-1' : 'sidebar pb-3' }}">
-                <ul class="nav nav-pills nav-sidebar {{ $configData['horizontal_menu'] ? '' : 'flex-column' }}"
+                <ul class="nav nav-pills nav-sidebar pt-1 {{ $configData['horizontal_menu'] ? '' : 'flex-column' }}"
                     {!! $configData['horizontal_menu'] ? '' : 'data-widget="treeview"' !!}
-                     style="padding-top: 10px">
+                     >
                     {!! admin_section(Dcat\Admin\Admin::SECTION['LEFT_SIDEBAR_MENU_TOP']) !!}
 
                     {!! admin_section(Dcat\Admin\Admin::SECTION['LEFT_SIDEBAR_MENU']) !!}

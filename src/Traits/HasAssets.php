@@ -12,6 +12,11 @@ trait HasAssets
         return app('admin.asset');
     }
 
+    public static function csp_nonce()
+    {
+        return static::asset()->csp_nonce;
+    }
+
     /**
      * @param  string|array  $name
      * @param  array  $params

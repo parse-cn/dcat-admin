@@ -1,15 +1,23 @@
-<style>::-ms-clear,::-ms-reveal{display: none;}</style>
+<style nonce="{{\Dcat\Admin\Admin::csp_nonce()}}">
+    ::-ms-clear, ::-ms-reveal {
+        display: none;
+    }
 
-<form pjax-container action="{!! $action !!}" class="input-no-border quick-search-form d-md-inline-block" style="display:none;margin-right: 16px">
+    .quick-search-form .table-filter label {
+        width: {{ $width }}rem;
+    }
+</style>
+
+<form pjax-container action="{!! $action !!}" class="input-no-border quick-search-form d-md-inline-block d-none">
     <div class="table-filter">
-        <label style="width: {{ $width }}rem">
+        <label>
             <input
-                    type="search"
-                    class="form-control form-control-sm quick-search-input"
-                    placeholder="{{ $placeholder }}"
-                    name="{{ $key }}"
-                    value="{{ $value }}"
-                    auto="{{ $auto ? '1' : '0' }}"
+                type="search"
+                class="form-control form-control-sm quick-search-input"
+                placeholder="{{ $placeholder }}"
+                name="{{ $key }}"
+                value="{{ $value }}"
+                auto="{{ $auto ? '1' : '0' }}"
             >
         </label>
     </div>

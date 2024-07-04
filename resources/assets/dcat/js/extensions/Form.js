@@ -1,6 +1,3 @@
-
-import '../jquery-form/jquery.form.min';
-
 let formCallbacks = {
         before: [], success: [], error: []
     };

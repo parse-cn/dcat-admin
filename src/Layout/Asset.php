@@ -39,8 +39,17 @@ class Asset
             'css' => '@admin/dcat/css/dcat-app.css',
         ],
         '@vendors'                      => [
-            'js'  => '@admin/dcat/plugins/vendors.min.js',
-            'css' => '@admin/dcat/plugins/vendors.min.css',
+//            'js'  => '@admin/dcat/plugins/vendors.min.js',
+            'js'  => [
+                'https://code.jquery.com/jquery-3.7.1.min.js',
+                'https://unpkg.com/nprogress@0.2.0/nprogress.js',
+                '@admin/dcat/plugins/perfectscrollbar/perfect-scrollbar.js',
+                '@admin/dcat/plugins/jquery-form/jquery.form.min.js',
+            ],
+            'css' => [
+                '@admin/dcat/plugins/vendors.min.css',
+                'https://unpkg.com/nprogress@0.2.0/nprogress.css',
+            ],
         ],
         '@jquery.initialize'            => [
             'js' => '@admin/dcat/plugins/jquery.initialize/jquery.initialize.min.js',
@@ -58,13 +67,14 @@ class Asset
             'js' => '@admin/dcat/extra/select-table.js',
         ],
         '@layer'                        => [
-            'js' => '@admin/dcat/plugins/layer/layer.js',
+            'js' => '@admin/dcat/plugins/layerui/layui.js',
+//            'js' => '@admin/dcat/plugins/layer/layer.js',
         ],
         '@tinymce'                      => [
             'js' => '@admin/dcat/plugins/tinymce/tinymce.min.js',
         ],
         '@pjax'                         => [
-            'js' => '@admin/dcat/plugins/jquery-pjax/jquery.pjax.min.js',
+            'js' => '@admin/dcat/plugins/jquery-pjax/jquery.pjax.js',
         ],
         '@toastr'                       => [
             'js'  => '@admin/dcat/plugins/extensions/toastr.min.js',
@@ -99,8 +109,8 @@ class Asset
             ],
         ],
         '@jstree'                       => [
-            'js'  => '@admin/dcat/plugins/jstree-theme/jstree.min.js',
-            'css' => '@admin/dcat/plugins/jstree-theme/themes/proton/style.min.css',
+            'js'  => '@admin/dcat/plugins/jstree/jstree.min.js',
+            'css' => '@admin/dcat/plugins/jstree/themes/default/style.min.css',
         ],
         '@switchery'                    => [
             'js'  => '@admin/dcat/plugins/switchery/switchery.min.js',
@@ -720,7 +730,7 @@ class Asset
             }
 
             foreach ((array)$paths as $path) {
-                $html .= "<script src=\"{$this->withVersionQuery($path)}\"></script>";
+                $html .= "<script nonce=\"{$this->csp_nonce}\" src=\"{$this->withVersionQuery($path)}\"></script>";
             }
         }
 
@@ -756,7 +766,7 @@ class Asset
         $directScript = implode(";\n", array_unique($this->directScript));
 
         return <<<HTML
-<script nonce=\"{$this->csp_nonce}\" data-exec-on-popstate>
+<script nonce="{$this->csp_nonce}" data-exec-on-popstate>
 (function () {
     try {
         {$directScript}
@@ -782,7 +792,7 @@ HTML;
     {
         $style = implode('', array_unique($this->style));
 
-        return "<style>$style</style>";
+        return "<style nonce=\"{$this->csp_nonce}\">$style</style>";
     }
 
     public function cspNonce($nonce)

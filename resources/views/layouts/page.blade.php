@@ -7,6 +7,7 @@
     {{-- 默认使用谷歌浏览器内核--}}
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta property="csp-nonce" content="{{Admin::asset()->csp_nonce}}"/>
 
     <title>@if(! empty($header)){{ $header }} | @endif {{ Dcat\Admin\Admin::title() }}</title>
 

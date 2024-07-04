@@ -1,6 +1,6 @@
 <body
-        class="dcat-admin-body sidebar-mini layout-fixed {{ $configData['body_class']}} {{ $configData['sidebar_class'] }}
-        {{ $configData['navbar_class'] === 'fixed-top' ? 'navbar-fixed-top' : '' }} " >
+    class="dcat-admin-body sidebar-mini layout-fixed {{ $configData['body_class']}} {{ $configData['sidebar_class'] }}
+        {{ $configData['navbar_class'] === 'fixed-top' ? 'navbar-fixed-top' : '' }} ">
 
 <script @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif >
     var Dcat = CreateDcat({!! Dcat\Admin\Admin::jsVariables() !!});
@@ -14,12 +14,20 @@
     @include('admin::partials.navbar')
 
     <div class="app-content content">
-        <div class="content-wrapper" id="{{ $pjaxContainerId }}" style="top: 0;min-height: 900px;">
+        <div class="content-wrapper top-0" id="{{ $pjaxContainerId }}">
             @yield('app')
         </div>
     </div>
 </div>
 
+<style nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}">
+    .arrow-up {
+        position: fixed;
+        bottom: 2%;
+        right: 10px;
+        display: none
+    }
+</style>
 <footer class="main-footer pt-1">
     <p class="clearfix blue-grey lighten-2 mb-0 text-center">
             <span class="text-center d-block d-md-inline-block mt-25">
@@ -29,7 +37,7 @@
                 v{{ Dcat\Admin\Admin::VERSION }}
             </span>
 
-        <button class="btn btn-primary btn-icon scroll-top pull-right" style="position: fixed;bottom: 2%; right: 10px;display: none">
+        <button class="btn btn-primary btn-icon scroll-top pull-right arrow-up">
             <i class="feather icon-arrow-up"></i>
         </button>
     </p>
@@ -39,7 +47,8 @@
 
 {!! Dcat\Admin\Admin::asset()->jsToHtml() !!}
 
-<script @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif>Dcat.boot();</script>
+<script
+    @if(\Dcat\Admin\Admin::asset()->csp_nonce) nonce="{{\Dcat\Admin\Admin::asset()->csp_nonce}}" @endif>Dcat.boot();</script>
 
 </body>
 

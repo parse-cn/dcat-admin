@@ -1,19 +1,8 @@
-
-/*=========================================================================================
-  File Name: app.js
-  Description: Dcat Admin JS脚本.
-  ----------------------------------------------------------------------------------------
-  Item Name: Dcat Admin
-  Author: Jqh
-  Author URL: https://github.com/jqhph
-==========================================================================================*/
-
-import Dcat from './Dcat'
-
-import NProgress from './NProgress/NProgress.min'
-import Ajax from './extensions/Ajax'
-import Toastr from './extensions/Toastr'
-import SweetAlert2 from './extensions/SweetAlert2'
+import Dcat from "./Dcat"
+import Menu from './bootstrappers/Menu'
+import Footer from './bootstrappers/Footer'
+import Pjax from './bootstrappers/Pjax'
+import DataActions from './bootstrappers/DataActions'
 import RowSelector from './extensions/RowSelector'
 import Grid from './extensions/Grid'
 import Form from './extensions/Form'
@@ -25,23 +14,8 @@ import Color from './extensions/Color'
 import Validator from './extensions/Validator'
 import DarkMode from './extensions/DarkMode'
 
-import Menu from './bootstrappers/Menu'
-import Footer from './bootstrappers/Footer'
-import Pjax from './bootstrappers/Pjax'
-import DataActions from './bootstrappers/DataActions'
+function extend(Dcat) {
 
-let win = window,
-    $ = jQuery;
-
-// 扩展Dcat对象
-function extend (Dcat) {
-    // ajax处理相关扩展函数
-    new Ajax(Dcat);
-    // Toastr简化使用函数
-    new Toastr(Dcat);
-    // SweetAlert2简化使用函数
-    new SweetAlert2(Dcat);
-    // Grid相关功能函数
     new Grid(Dcat);
     // loading效果
     new Loading(Dcat);
@@ -54,10 +28,8 @@ function extend (Dcat) {
     // 黑色主题切换
     new DarkMode(Dcat);
 
-    // 加载进度条
     Dcat.NP = NProgress;
 
-    // 行选择器
     Dcat.RowSelector = function (options) {
         return new RowSelector(options)
     };
@@ -78,14 +50,13 @@ function extend (Dcat) {
     };
 }
 
-// 初始化
 function listen(Dcat) {
-    // 只初始化一次
+// 只初始化一次
     Dcat.booting(() => {
         Dcat.NP.configure({parent: '.app-content'});
 
         // layer弹窗设置
-        layer.config({maxmin: true, moveOut: true, shade: false});
+        // layer.config({maxmin: true, moveOut: true, shade: false});
 
         //////////////////////////////////////////////////////////
 
@@ -115,13 +86,9 @@ function listen(Dcat) {
 function prepare(Dcat) {
     extend(Dcat);
     listen(Dcat);
-
     return Dcat;
 }
 
-/**
- * @returns {Dcat}
- */
-win.CreateDcat = function(config) {
+window.CreateDcat = function (config) {
     return prepare(new Dcat(config));
 };
