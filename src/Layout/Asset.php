@@ -41,7 +41,7 @@ class Asset
         '@vendors'                      => [
 //            'js'  => '@admin/dcat/plugins/vendors.min.js',
             'js'  => [
-                'https://code.jquery.com/jquery-3.7.1.min.js',
+                '@admin/dcat/plugins/jquery/jquery-4.0.0-beta.min.js',
                 'https://unpkg.com/nprogress@0.2.0/nprogress.js',
                 '@admin/dcat/plugins/perfectscrollbar/perfect-scrollbar.js',
                 '@admin/dcat/plugins/jquery-form/jquery.form.min.js',
