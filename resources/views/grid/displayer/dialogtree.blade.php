@@ -1,4 +1,4 @@
-<a href="javascript:void(0)" class="grid-dialog-tree"
+<a role="button" class="grid-dialog-tree"
    data-url="{{ $url }}"
    data-title="{{ $title }}"
    data-checked="{{ $checkAll }}"

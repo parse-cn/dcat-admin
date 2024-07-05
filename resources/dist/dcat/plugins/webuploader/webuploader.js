@@ -1772,15 +1772,13 @@
                             button.outerHeight() : button.height(),
     
                     pos = button.offset();
-
+    
                 width && height && shimContainer.css({
                     bottom: 'auto',
                     right: 'auto',
                     width: width + 'px',
                     height: height + 'px'
-                }).offset(pos);
-
-                shimContainer.offset(button.offset());
+                }).offset( pos );
             },
     
             enable: function() {
@@ -2179,8 +2177,8 @@
         return Uploader.register({
     
             name: 'image',
-
-
+    
+    
             /**
              * 生成缩略图，此过程为异步，所以需要传入`callback`。
              * 通常情况在图片加入队里后调用此方法来生成预览图以增强交互效果。
@@ -2237,7 +2235,25 @@
                 height = height || opts.height;
     
                 image = new Image( opts );
-
+    
+                image.once( 'load', function() {
+                    file._info = file._info || image.info();
+                    file._meta = file._meta || image.meta();
+    
+                    // 如果 width 的值介于 0 - 1
+                    // 说明设置的是百分比。
+                    if ( width <= 1 && width > 0 ) {
+                        width = file._info.width * width;
+                    }
+    
+                    // 同样的规则应用于 height
+                    if ( height <= 1 && height > 0 ) {
+                        height = file._info.height * height;
+                    }
+    
+                    image.resize( width, height );
+                });
+    
                 // 当 resize 完后
                 image.once( 'complete', function() {
                     cb( false, image.getAsDataUrl( opts.type ) );
@@ -2254,8 +2270,6 @@
                     file._meta && image.meta( file._meta );
                     image.loadFromBlob( file.source );
                 });
-
-                return image;
             },
     
             beforeSendFile: function( file ) {
@@ -2288,7 +2302,7 @@
                 image.once( 'load', function() {
                     var width = opts.width,
                         height = opts.height;
-
+    
                     file._info = file._info || image.info();
                     file._meta = file._meta || image.meta();
     
@@ -4178,17 +4192,16 @@
         api.addValidator( 'fileNumLimit', function() {
             var uploader = this,
                 opts = uploader.options,
-                max = parseInt( opts.fileNumLimit ),
                 count = 0,
+                max = parseInt( opts.fileNumLimit, 10 ),
                 flag = true;
-
+    
             if ( !max ) {
-                return true;
+                return;
             }
     
             uploader.on( 'beforeFileQueued', function( file ) {
-                max = parseInt( opts.fileNumLimit );
-
+    
                 if ( count >= max && flag ) {
                     flag = false;
                     this.trigger( 'error', 'Q_EXCEED_NUM_LIMIT', max, file );
@@ -6187,7 +6200,7 @@
                     //
     
                     return jpegDataUri
-            };
+            }
     
             function setQuality(quality){
                 if (quality <= 0) {
@@ -6197,7 +6210,7 @@
                     quality = 100;
                 }
     
-                if(currentQuality == quality) return; // don't recalc if unchanged
+                if(currentQuality == quality) return // don't recalc if unchanged
     
                 var sf = 0;
                 if (quality < 50) {
@@ -6215,7 +6228,7 @@
                 // var time_start = new Date().getTime();
                 if(!quality) quality = 50;
                 // Create tables
-                initCharLookupTable();
+                initCharLookupTable()
                 initHuffmanTbl();
                 initCategoryNumber();
                 initRGBYUVTable();
@@ -6233,7 +6246,7 @@
             var encoder = new JPEGEncoder( quality );
     
             return encoder.encode( data );
-        };
+        }
     
         return JPEGEncoder;
     });

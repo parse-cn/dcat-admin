@@ -41,11 +41,13 @@ class Asset
         '@vendors'                      => [
 //            'js'  => '@admin/dcat/plugins/vendors.min.js',
             'js'  => [
-                '@admin/dcat/plugins/jquery/jquery-4.0.0-beta.min.js',
+//                '@admin/dcat/plugins/jquery/jquery-4.0.0-beta.min.js',
+                '@admin/dcat/plugins/jquery/jquery-3.7.1.min.js',
                 'https://unpkg.com/nprogress@0.2.0/nprogress.js',
                 '@admin/dcat/plugins/perfectscrollbar/perfect-scrollbar.js',
                 '@admin/dcat/plugins/jquery-form/jquery.form.min.js',
                 '@admin/dcat/plugins/sweetalert2/sweetalert2.min.js',
+                '@admin/dcat/plugins/bootstrap-4.4.1/js/bootstrap.js',
             ],
             'css' => [
                 '@admin/dcat/plugins/vendors.min.css',
@@ -69,8 +71,11 @@ class Asset
             'js' => '@admin/dcat/extra/select-table.js',
         ],
         '@layer'                        => [
-            'js' => '@admin/dcat/plugins/layerui/layui.js',
-//            'js' => '@admin/dcat/plugins/layer/layer.js',
+//            'js' => '@admin/dcat/plugins/layerui/layui.js',
+            'js' => [
+                '@admin/dcat/plugins/layer/layer.js',
+                '@admin/dcat/plugins/layerui/layui.js',
+            ],
         ],
         '@tinymce'                      => [
             'js' => '@admin/dcat/plugins/tinymce/tinymce.min.js',
@@ -83,7 +88,7 @@ class Asset
             'css' => '@admin/dcat/plugins/extensions/toastr.css',
         ],
         '@jquery.nestable'              => [
-            'js'  => '@admin/dcat/plugins/nestable/jquery.nestable.min.js',
+            'js'  => '@admin/dcat/plugins/nestable/jquery.nestable.js',
             'css' => '@admin/dcat/plugins/nestable/nestable.css',
         ],
         '@validator'                    => [
@@ -91,7 +96,7 @@ class Asset
         ],
         '@select2'                      => [
             'js'  => [
-                '@admin/dcat/plugins/select/select2.full.min.js',
+                '@admin/dcat/plugins/select/select2.full.js',
                 '@admin/dcat/plugins/select/i18n/{lang}.js',
             ],
             'css' => '@admin/dcat/plugins/select/select2.min.css',
@@ -179,7 +184,7 @@ class Asset
             'js' => '@admin/dcat/plugins/charts/apexcharts.min.js',
         ],
         '@fontawesome-iconpicker'       => [
-            'js'  => '@admin/dcat/plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js',
+            'js'  => '@admin/dcat/plugins/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js',
             'css' => '@admin/dcat/plugins/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
         ],
         '@color'                        => [
@@ -236,8 +241,9 @@ class Asset
      * @var array
      */
     public $headerJs = [
-        'vendors' => '@vendors',
-        'dcat'    => '@dcat',
+        'vendors'  => '@vendors',
+        'dcat'     => '@dcat',
+        'uploader' => '@webuploader',
     ];
 
     /**
