@@ -15,11 +15,14 @@ import Validator from './extensions/Validator'
 import DarkMode from './extensions/DarkMode'
 import Ajax from './extensions/Ajax'
 import SweetAlert2 from  './extensions/SweetAlert2'
+import Toastr from './extensions/Toastr'
 
 function extend(Dcat) {
     new Ajax(Dcat);
 
     new SweetAlert2(Dcat);
+
+    new Toastr(Dcat);
 
     new Grid(Dcat);
     // loading效果
