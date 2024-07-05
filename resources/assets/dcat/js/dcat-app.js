@@ -13,8 +13,13 @@ import Slider from './extensions/Slider'
 import Color from './extensions/Color'
 import Validator from './extensions/Validator'
 import DarkMode from './extensions/DarkMode'
+import Ajax from './extensions/Ajax'
+import SweetAlert2 from  './extensions/SweetAlert2'
 
 function extend(Dcat) {
+    new Ajax(Dcat);
+
+    new SweetAlert2(Dcat);
 
     new Grid(Dcat);
     // loading效果

@@ -1,12 +1,11 @@
 @if(! $isHoldSelectAllCheckbox)
     <style nonce="{{Admin::asset()->csp_nonce}}">
         .btn-dropdown-hold {
-            display: none;
             margin-right: 3px;
             z-index: 100;
         }
     </style>
-    <div class="btn-group dropdown  {{$selectAllName}}-btn btn-dropdown-hold">
+    <div class="btn-group dropdown  {{$selectAllName}}-btn btn-dropdown-hold d-none">
         <button type="button" class="btn btn-white dropdown-toggle btn-mini" data-toggle="dropdown">
             <span class="d-none d-sm-inline selected"></span>
             <span class="caret"></span>
@@ -28,14 +27,16 @@
 
 <script>
     Dcat.init('.{{ $parent->getRowName() }}-checkbox', function ($this) {
+        var btn = $('.{{ $selectAllName }}-btn');
         $this.on('change', function () {
             var btn = $('.{{ $selectAllName }}-btn'),
                 selected = Dcat.grid.selectedRows('{{ $parent->getName() }}').length;
-
             if (selected) {
-                btn.show()
+                btn.removeClass("d-none");
+                btn.addClass("d-inline-block");
             } else {
-                btn.hide()
+                btn.addClass("d-none");
+                btn.removeClass("d-inline-block");
             }
             setTimeout(function () {
                 btn.find('.selected').html("{!! trans('admin.grid_items_selected') !!}".replace('{n}', selected));

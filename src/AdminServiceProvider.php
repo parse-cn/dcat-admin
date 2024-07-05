@@ -255,6 +255,12 @@ class AdminServiceProvider extends ServiceProvider
 <?php echo admin_color()->primary($amt); ?>
 PHP;
         });
+
+        Blade::directive('csp_nonce_attribute', function() {
+            return <<<PHP
+<?php echo \Dcat\Admin\Support\Helper::csp_nonce_attribute(); ?>
+PHP;
+        });
     }
 
     /**

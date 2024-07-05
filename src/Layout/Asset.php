@@ -45,10 +45,12 @@ class Asset
                 'https://unpkg.com/nprogress@0.2.0/nprogress.js',
                 '@admin/dcat/plugins/perfectscrollbar/perfect-scrollbar.js',
                 '@admin/dcat/plugins/jquery-form/jquery.form.min.js',
+                '@admin/dcat/plugins/sweetalert2/sweetalert2.min.js',
             ],
             'css' => [
                 '@admin/dcat/plugins/vendors.min.css',
                 'https://unpkg.com/nprogress@0.2.0/nprogress.css',
+                '@admin/dcat/plugins/sweetalert2/sweetalert2.css',
             ],
         ],
         '@jquery.initialize'            => [

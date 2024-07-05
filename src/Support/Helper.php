@@ -2,6 +2,7 @@
 
 namespace Dcat\Admin\Support;
 
+use Dcat\Admin\Admin;
 use Dcat\Admin\Grid;
 use Dcat\Laravel\Database\WhereHasInServiceProvider;
 use Illuminate\Contracts\Support\Arrayable;
@@ -68,7 +69,7 @@ class Helper
 
             $value = is_array($array) ? $array : explode(',', $value);
         } else {
-            $value = (array) $value;
+            $value = (array)$value;
         }
 
         return $filter ? array_filter($value, function ($v) {
@@ -93,18 +94,18 @@ class Helper
         if ($value instanceof \Closure) {
             $newThis && ($value = $value->bindTo($newThis));
 
-            $value = $value(...(array) $params);
+            $value = $value(...(array)$params);
         }
 
         if ($value instanceof Renderable) {
-            return (string) $value->render();
+            return (string)$value->render();
         }
 
         if ($value instanceof Htmlable) {
-            return (string) $value->toHtml();
+            return (string)$value->toHtml();
         }
 
-        return (string) $value;
+        return (string)$value;
     }
 
     /**
@@ -116,13 +117,13 @@ class Helper
     {
         $router = app('router');
 
-        if (! $router->current()) {
+        if (!$router->current()) {
             return 'undefined';
         }
 
         $actionName = $router->current()->getActionName();
 
-        if (! isset(static::$controllerNames[$actionName])) {
+        if (!isset(static::$controllerNames[$actionName])) {
             $controller = class_basename(explode('@', $actionName)[0]);
 
             static::$controllerNames[$actionName] = str_replace('Controller', '', $controller);
@@ -139,7 +140,7 @@ class Helper
     {
         $html = '';
 
-        foreach ((array) $attributes as $key => &$value) {
+        foreach ((array)$attributes as $key => &$value) {
             if (is_array($value)) {
                 $value = implode(' ', $value);
             }
@@ -151,7 +152,7 @@ class Helper
             $element = '';
 
             if ($value !== null) {
-                $element = $key.'="'.htmlentities($value, ENT_QUOTES, 'UTF-8').'" ';
+                $element = $key . '="' . htmlentities($value, ENT_QUOTES, 'UTF-8') . '" ';
             }
 
             $html .= $element;
@@ -167,7 +168,7 @@ class Helper
      */
     public static function urlWithQuery(?string $url, array $query = [])
     {
-        if (! $url || ! $query) {
+        if (!$url || !$query) {
             return $url;
         }
 
@@ -177,7 +178,7 @@ class Helper
 
         parse_str($array[1] ?? '', $originalQuery);
 
-        return $url.'?'.http_build_query(array_merge($originalQuery, $query));
+        return $url . '?' . http_build_query(array_merge($originalQuery, $query));
     }
 
     /**
@@ -187,7 +188,7 @@ class Helper
      */
     public static function urlWithoutQuery($url, $keys)
     {
-        if (! Str::contains($url, '?') || ! $keys) {
+        if (!Str::contains($url, '?') || !$keys) {
             return $url;
         }
 
@@ -195,7 +196,7 @@ class Helper
             $keys = $keys->toArray();
         }
 
-        $keys = (array) $keys;
+        $keys = (array)$keys;
 
         $urlInfo = parse_url($url);
 
@@ -206,7 +207,7 @@ class Helper
         $baseUrl = explode('?', $url)[0];
 
         return $query
-            ? $baseUrl.'?'.http_build_query($query)
+            ? $baseUrl . '?' . http_build_query($query)
             : $baseUrl;
     }
 
@@ -234,7 +235,7 @@ class Helper
 
         parse_str($value[1], $query);
 
-        foreach ((array) $keys as $key) {
+        foreach ((array)$keys as $key) {
             if (Arr::has($query, $key)) {
                 return true;
             }
@@ -246,15 +247,15 @@ class Helper
     /**
      * 匹配请求路径.
      *
+     * @param  string  $path
+     * @param  null|string  $current
+     * @return bool
      * @example
      *      Helper::matchRequestPath(admin_base_path('auth/user'))
      *      Helper::matchRequestPath(admin_base_path('auth/user*'))
      *      Helper::matchRequestPath(admin_base_path('auth/user/* /edit'))
      *      Helper::matchRequestPath('GET,POST:auth/user')
      *
-     * @param  string  $path
-     * @param  null|string  $current
-     * @return bool
      */
     public static function matchRequestPath($path, ?string $current = null)
     {
@@ -266,7 +267,7 @@ class Helper
 
             $methods = array_map('strtoupper', explode(',', $methods));
 
-            if (! empty($methods) && ! in_array($request->method(), $methods)) {
+            if (!empty($methods) && !in_array($request->method(), $methods)) {
                 return false;
             }
         }
@@ -276,7 +277,7 @@ class Helper
             return true;
         }
 
-        if (! Str::contains($path, '*')) {
+        if (!Str::contains($path, '*')) {
             return $path === $current;
         }
 
@@ -302,16 +303,16 @@ class Helper
         ?string $parentKeyName = null,
         ?string $childrenKeyName = null
     ) {
-        $branch = [];
-        $primaryKeyName = $primaryKeyName ?: 'id';
-        $parentKeyName = $parentKeyName ?: 'parent_id';
+        $branch          = [];
+        $primaryKeyName  = $primaryKeyName ?: 'id';
+        $parentKeyName   = $parentKeyName ?: 'parent_id';
         $childrenKeyName = $childrenKeyName ?: 'children';
 
-        $parentId = is_numeric($parentId) ? (int) $parentId : $parentId;
+        $parentId = is_numeric($parentId) ? (int)$parentId : $parentId;
 
         foreach ($nodes as $node) {
             $pk = $node[$parentKeyName];
-            $pk = is_numeric($pk) ? (int) $pk : $pk;
+            $pk = is_numeric($pk) ? (int)$pk : $pk;
 
             if ($pk === $parentId) {
                 $children = static::buildNestedArray(
@@ -340,7 +341,7 @@ class Helper
     public static function slug(string $name, string $symbol = '-')
     {
         $text = preg_replace_callback('/([A-Z])/', function ($text) use ($symbol) {
-            return $symbol.strtolower($text[1]);
+            return $symbol . strtolower($text[1]);
         }, $name);
 
         return str_replace('_', $symbol, ltrim($text, $symbol));
@@ -354,7 +355,7 @@ class Helper
     public static function exportArray(array &$array, $level = 1)
     {
         $start = '[';
-        $end = ']';
+        $end   = ']';
 
         $txt = "$start\n";
 
@@ -362,7 +363,7 @@ class Helper
             if (is_array($v)) {
                 $pre = is_string($k) ? "'$k' => " : "$k => ";
 
-                $txt .= str_repeat(' ', $level * 4).$pre.static::exportArray($v, $level + 1).",\n";
+                $txt .= str_repeat(' ', $level * 4) . $pre . static::exportArray($v, $level + 1) . ",\n";
 
                 continue;
             }
@@ -381,10 +382,10 @@ class Helper
 
             $pre = is_string($k) ? "'$k' => " : "$k => ";
 
-            $txt .= str_repeat(' ', $level * 4)."{$pre}{$t},\n";
+            $txt .= str_repeat(' ', $level * 4) . "{$pre}{$t},\n";
         }
 
-        return $txt.str_repeat(' ', ($level - 1) * 4).$end;
+        return $txt . str_repeat(' ', ($level - 1) * 4) . $end;
     }
 
     /**
@@ -393,7 +394,7 @@ class Helper
      */
     public static function exportArrayPhp(array $array)
     {
-        return "<?php \nreturn ".static::exportArray($array).";\n";
+        return "<?php \nreturn " . static::exportArray($array) . ";\n";
     }
 
     /**
@@ -405,7 +406,7 @@ class Helper
      */
     public static function deleteByValue(&$array, $value, bool $strict = false)
     {
-        $value = (array) $value;
+        $value = (array)$value;
 
         foreach ($array as $index => $item) {
             if (in_array($item, $value, $strict)) {
@@ -420,10 +421,10 @@ class Helper
      */
     public static function deleteContains(&$array, $value)
     {
-        $value = (array) $value;
+        $value = (array)$value;
 
         foreach ($array as $index => $item) {
-            foreach ($value as  $v) {
+            foreach ($value as $v) {
                 if (Str::contains($item, $v)) {
                     unset($array[$index]);
                 }
@@ -440,7 +441,7 @@ class Helper
      */
     public static function colorLighten(string $color, int $amt)
     {
-        if (! $amt) {
+        if (!$amt) {
             return $color;
         }
 
@@ -454,7 +455,7 @@ class Helper
 
         [$red, $blue, $green] = static::colorToRBG($color, $amt);
 
-        return ($hasPrefix ? '#' : '').dechex($green + ($blue << 8) + ($red << 16));
+        return ($hasPrefix ? '#' : '') . dechex($green + ($blue << 8) + ($red << 16));
     }
 
     /**
@@ -511,8 +512,8 @@ class Helper
 
         $num = hexdec($color);
 
-        $red = $format(($num >> 16) + $amt);
-        $blue = $format((($num >> 8) & 0x00FF) + $amt);
+        $red   = $format(($num >> 16) + $amt);
+        $blue  = $format((($num >> 8) & 0x00FF) + $amt);
         $green = $format(($num & 0x0000FF) + $amt);
 
         return [$red, $blue, $green];
@@ -559,7 +560,7 @@ class Helper
         /* @var Request $request */
         $request = $request ?: request();
 
-        return $request->ajax() && ! $request->pjax();
+        return $request->ajax() && !$request->pjax();
     }
 
     /**
@@ -569,7 +570,7 @@ class Helper
      */
     public static function isIEBrowser()
     {
-        return (bool) preg_match('/Mozilla\/5\.0 \(Windows NT 10\.0; WOW64; Trident\/7\.0; rv:[0-9\.]*\) like Gecko/i', $_SERVER['HTTP_USER_AGENT'] ?? '');
+        return (bool)preg_match('/Mozilla\/5\.0 \(Windows NT 10\.0; WOW64; Trident\/7\.0; rv:[0-9\.]*\) like Gecko/i', $_SERVER['HTTP_USER_AGENT'] ?? '');
     }
 
     /**
@@ -588,7 +589,7 @@ class Helper
      */
     public static function setPreviousUrl($url)
     {
-        session()->flash('admin.prev.url', static::urlWithoutQuery((string) $url, '_pjax'));
+        session()->flash('admin.prev.url', static::urlWithoutQuery((string)$url, '_pjax'));
     }
 
     /**
@@ -596,7 +597,7 @@ class Helper
      */
     public static function getPreviousUrl()
     {
-        return (string) (session()->get('admin.prev.url') ? url(session()->get('admin.prev.url')) : url()->previous());
+        return (string)(session()->get('admin.prev.url') ? url(session()->get('admin.prev.url')) : url()->previous());
     }
 
     /**
@@ -634,11 +635,11 @@ class Helper
             return false;
         }
 
-        if (! is_scalar($value1) || ! is_scalar($value2)) {
+        if (!is_scalar($value1) || !is_scalar($value2)) {
             return $value1 === $value2;
         }
 
-        return (string) $value1 === (string) $value2;
+        return (string)$value1 === (string)$value2;
     }
 
     /**
@@ -652,13 +653,13 @@ class Helper
     {
         $array = array_map(function ($v) {
             if (is_scalar($v) || $v === null) {
-                $v = (string) $v;
+                $v = (string)$v;
             }
 
             return $v;
         }, $array);
 
-        return in_array((string) $value, $array, true);
+        return in_array((string)$value, $array, true);
     }
 
     /**
@@ -675,7 +676,7 @@ class Helper
             return $value;
         }
 
-        return rtrim(mb_substr($value, 0, $limit, 'UTF-8')).$end;
+        return rtrim(mb_substr($value, 0, $limit, 'UTF-8')) . $end;
     }
 
     /**
@@ -704,7 +705,7 @@ class Helper
         $composer = Composer::parse(base_path('composer.json'));
 
         $map = collect($composer->autoload['psr-4'] ?? [])->mapWithKeys(function ($path, $namespace) {
-            $namespace = trim($namespace, '\\').'\\';
+            $namespace = trim($namespace, '\\') . '\\';
 
             return [$namespace => [$namespace, $path]];
         })->sortBy(function ($_, $namespace) {
@@ -724,12 +725,12 @@ class Helper
         }
 
         if (empty($values)) {
-            $values = [$prefix.'\\', self::slug($prefix).'/'];
+            $values = [$prefix . '\\', self::slug($prefix) . '/'];
         }
 
         [$namespace, $path] = $values;
 
-        return base_path(str_replace([$namespace, '\\'], [$path, '/'], $class)).'.php';
+        return base_path(str_replace([$namespace, '\\'], [$path, '/'], $class)) . '.php';
     }
 
     /**
@@ -747,7 +748,7 @@ class Helper
             if (is_array($column)) {
                 foreach ($column as $v) {
                     if (Str::contains($v, '.')) {
-                        $first = explode('.', $v)[0];
+                        $first             = explode('.', $v)[0];
                         $relations[$first] = null;
                     }
                 }
@@ -756,7 +757,7 @@ class Helper
             }
 
             if (Str::contains($column, '.')) {
-                $first = explode('.', $column)[0];
+                $first             = explode('.', $column)[0];
                 $relations[$first] = null;
             }
         });
@@ -780,18 +781,18 @@ class Helper
      * @param  mixed  $model
      * @param  string  $column
      * @param  string  $query
-     * @param mixed array $params
+     * @param  mixed array $params
      * @return void
      */
     public static function withQueryCondition($model, ?string $column, string $query, array $params)
     {
-        if (! Str::contains($column, '.')) {
+        if (!Str::contains($column, '.')) {
             $model->$query($column, ...$params);
 
             return;
         }
 
-        $method = $query === 'orWhere' ? 'orWhere' : 'where';
+        $method   = $query === 'orWhere' ? 'orWhere' : 'where';
         $subQuery = $query === 'orWhere' ? 'where' : $query;
 
         $model->$method(function ($q) use ($column, $subQuery, $params) {
@@ -853,7 +854,7 @@ class Helper
      */
     public static function formatElementName($name)
     {
-        if (! $name) {
+        if (!$name) {
             return $name;
         }
 
@@ -895,13 +896,13 @@ class Helper
             return $array = $value;
         }
 
-        $keys = explode('.', $key);
+        $keys    = explode('.', $key);
         $default = null;
 
         while (count($keys) > 1) {
             $key = array_shift($keys);
 
-            if (! isset($array[$key]) || (! is_array($array[$key]) && ! $array[$key] instanceof \ArrayAccess)) {
+            if (!isset($array[$key]) || (!is_array($array[$key]) && !$array[$key] instanceof \ArrayAccess)) {
                 $array[$key] = [];
             }
 
@@ -950,7 +951,7 @@ class Helper
      */
     public static function basename($name)
     {
-        if (! $name) {
+        if (!$name) {
             return $name;
         }
 
@@ -983,11 +984,11 @@ class Helper
     {
         $request = $request ?: request();
 
-        if (! URL::isValidUrl($to)) {
+        if (!URL::isValidUrl($to)) {
             $to = admin_base_path($to);
         }
 
-        if ($request->ajax() && ! $request->pjax()) {
+        if ($request->ajax() && !$request->pjax()) {
             return response()->json(['redirect' => $to], $statusCode);
         }
 
@@ -998,5 +999,15 @@ class Helper
         $redirectCodes = [201, 301, 302, 303, 307, 308];
 
         return redirect($to, in_array($statusCode, $redirectCodes, true) ? $statusCode : 302);
+    }
+
+    public static function csp_nonce()
+    {
+        return Admin::csp_nonce();
+    }
+
+    public static function csp_nonce_attribute()
+    {
+        return 'nonce="' . Admin::csp_nonce() . '"';
     }
 }

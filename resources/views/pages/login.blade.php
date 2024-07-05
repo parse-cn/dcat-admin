@@ -1,4 +1,4 @@
-<style>
+<style @csp_nonce_attribute>
     .login-box {
         margin-top: -10rem;
         padding: 5px;
@@ -119,7 +119,7 @@
     </div>
 </div>
 
-<script>
+<script @csp_nonce_attribute>
 Dcat.ready(function () {
     // ajax表单提交
     $('#login-form').form({

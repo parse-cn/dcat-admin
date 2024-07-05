@@ -9,7 +9,7 @@
 ==========================================================================================*/
 
 import Dcat from './Dcat'
-
+import SweetAlert2 from  './extensions/SweetAlert2'
 import Ajax from './extensions/Ajax'
 import Toastr from './extensions/Toastr'
 import RowSelector from './extensions/RowSelector'

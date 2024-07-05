@@ -1,5 +1,4 @@
-
-import Swal from '../sweetalert/sweetalert2'
+// import Swal from '../sweetalert/sweetalert2'
 
 let w = window;
 
@@ -14,7 +13,7 @@ export default class SweetAlert2 {
         Swal.confirm = _this.confirm.bind(_this);
 
         w.swal = w.Swal = _this.swal = Dcat.swal = Swal;
-        
+
         Dcat.confirm = Swal.confirm;
     }
 
@@ -42,8 +41,10 @@ export default class SweetAlert2 {
             showLoaderOnConfirm: true,
             confirmButtonText: lang['confirm'],
             cancelButtonText: lang['cancel'],
-            confirmButtonClass: 'btn btn-primary',
-            cancelButtonClass: 'btn btn-white ml-1',
+            customClass: {
+              confirmButton: 'btn btn-primary',
+              cancelButton: 'btn btn-white ml-1'
+            },
             buttonsStyling: false,
         }, options);
 
