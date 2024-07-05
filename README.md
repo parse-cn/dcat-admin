@@ -4,6 +4,13 @@
 
 ```
 #composer.json
+
+...
+ "require": {
+    "parse-cn/laravel-admin": "2.*",
+    "spatie/laravel-csp": "^2.10"
+},
+...
 "repositories": [
     {
         "type": "git",
@@ -11,6 +18,7 @@
     }
 ],
 "minimum-stability": "dev",
+...
 ```
 
 后面和安装 dcat-admin 一样
