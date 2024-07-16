@@ -39,15 +39,12 @@ class Asset
             'css' => '@admin/dcat/css/dcat-app.css',
         ],
         '@vendors'                      => [
-//            'js'  => '@admin/dcat/plugins/vendors.min.js',
             'js'  => [
-//                '@admin/dcat/plugins/jquery/jquery-4.0.0-beta.min.js',
-                '@admin/dcat/plugins/jquery/jquery-3.7.1.min.js',
-                'https://unpkg.com/nprogress@0.2.0/nprogress.js',
-                '@admin/dcat/plugins/perfectscrollbar/perfect-scrollbar.js',
-                '@admin/dcat/plugins/jquery-form/jquery.form.min.js',
+                '@admin/dcat/plugins/vendors.min.js',
                 '@admin/dcat/plugins/sweetalert2/sweetalert2.min.js',
-                '@admin/dcat/plugins/bootstrap-4.4.1/js/bootstrap.js',
+                'https://unpkg.com/nprogress@0.2.0/nprogress.js',
+                "@admin/dcat/plugins/perfectscrollbar/perfect-scrollbar.js",
+                '@admin/dcat/plugins/jquery-form/jquery.form.min.js',
             ],
             'css' => [
                 '@admin/dcat/plugins/vendors.min.css',
@@ -76,12 +73,16 @@ class Asset
                 '@admin/dcat/plugins/layer/layer.js',
                 '@admin/dcat/plugins/layerui/layui.js',
             ],
+            'css' => [
+                '@admin/dcat/plugins/layer/theme/default/layer.css',
+                '@admin/dcat/plugins/layerui/layui.css',
+            ],
         ],
         '@tinymce'                      => [
             'js' => '@admin/dcat/plugins/tinymce/tinymce.min.js',
         ],
         '@pjax'                         => [
-            'js' => '@admin/dcat/plugins/jquery-pjax/jquery.pjax.js',
+            'js' => ['@admin/dcat/plugins/jquery-pjax/jquery.pjax.min.js'],
         ],
         '@toastr'                       => [
             'js'  => '@admin/dcat/plugins/extensions/toastr.min.js',
@@ -243,7 +244,7 @@ class Asset
     public $headerJs = [
         'vendors'  => '@vendors',
         'dcat'     => '@dcat',
-        'uploader' => '@webuploader',
+//        'uploader' => '@webuploader',
     ];
 
     /**
@@ -738,7 +739,7 @@ class Asset
             }
 
             foreach ((array)$paths as $path) {
-                $html .= "<script nonce=\"{$this->csp_nonce}\" src=\"{$this->withVersionQuery($path)}\"></script>";
+                $html .= "<script nonce=\"{$this->csp_nonce()}\" src=\"{$this->withVersionQuery($path)}\"></script>";
             }
         }
 
@@ -758,7 +759,7 @@ class Asset
             }
 
             foreach ((array)$paths as $path) {
-                $html .= "<script nonce=\"{$this->csp_nonce}\" src=\"{$this->withVersionQuery($path)}\"></script>";
+                $html .= "<script nonce=\"{$this->csp_nonce()}\" src=\"{$this->withVersionQuery($path)}\"></script>";
             }
         }
 
@@ -774,7 +775,7 @@ class Asset
         $directScript = implode(";\n", array_unique($this->directScript));
 
         return <<<HTML
-<script nonce="{$this->csp_nonce}" data-exec-on-popstate>
+<script nonce="{$this->csp_nonce()}" data-exec-on-popstate>
 (function () {
     try {
         {$directScript}
@@ -800,12 +801,11 @@ HTML;
     {
         $style = implode('', array_unique($this->style));
 
-        return "<style nonce=\"{$this->csp_nonce}\">$style</style>";
+        return "<style nonce=\"{$this->csp_nonce()}\">$style</style>";
     }
 
-    public function cspNonce($nonce)
+    public function csp_nonce()
     {
-        $this->csp_nonce = $nonce;
-        return $this;
+        return csp_nonce();
     }
 }
