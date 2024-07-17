@@ -1,10 +1,10 @@
 @if($showHeader)
-    <div class="box-header with-border mb-1" style="padding: .65rem 1rem">
-        <h3 class="box-title" style="line-height:30px">{!! $form->title() !!}</h3>
+    <div class="box-header with-border mb-1 p-1">
+        <h3 class="box-title line-height-30">{!! $form->title() !!}</h3>
         <div class="pull-right">{!! $form->renderTools() !!}</div>
     </div>
 @endif
-<div class="box-body" {!! $tabObj->isEmpty() && !$form->hasRows() ? 'style="margin-top: 6px"' : '' !!} >
+<div class="box-body {!! $tabObj->isEmpty() && !$form->hasRows() ? 'mt-1' : '' !!}" >
     @if(!$tabObj->isEmpty())
         @include('admin::form.tab', compact('tabObj', 'form'))
     @else

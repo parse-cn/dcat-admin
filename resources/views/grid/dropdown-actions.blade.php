@@ -1,9 +1,9 @@
 @if (!empty($default) || !empty($custom))
 <div class="grid-dropdown-actions dropdown">
-    <a href="#" style="padding:0 10px;" data-toggle="dropdown">
+    <a href="#" class="dropdown-padding" data-toggle="dropdown">
         <i class="feather icon-more-vertical"></i>
     </a>
-    <ul class="dropdown-menu" style="left: -65px;">
+    <ul class="dropdown-menu dropdown-menu-position" >
 
         @foreach($default as $action)
             <li class="dropdown-item">{!! Dcat\Admin\Support\Helper::render($action) !!}</li>
@@ -22,3 +22,12 @@
     </ul>
 </div>
 @endif
+
+<style nonce="{{csp_nonce()}}">
+    .dropdown-padding {
+        padding:0 10px;
+    }
+    .dropdown-menu-position {
+        left: -65px;
+    }
+</style>

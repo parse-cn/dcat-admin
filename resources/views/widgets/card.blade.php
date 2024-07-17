@@ -9,7 +9,7 @@
             </div>
         </div>
     @endif
-    <div class="card-body" style="{!! $padding !!}">
+    <div class="card-body">
         {!! $content !!}
     </div>
     @if($footer)

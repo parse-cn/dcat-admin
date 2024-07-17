@@ -22,7 +22,6 @@ class Dropdown extends Widget
     protected $button = [
         'text'  => null,
         'class' => 'btn btn-sm btn-white waves-effect',
-        'style' => null,
     ];
 
     /**
@@ -107,7 +106,7 @@ class Dropdown extends Widget
      */
     public function buttonStyle(?string $style)
     {
-        $this->button['style'] = $style;
+//        $this->button['style'] = $style;
 
         return $this;
     }

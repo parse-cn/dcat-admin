@@ -1,4 +1,4 @@
-<ul class="pagination pagination-sm no-margin pull-right shadow-100" style="border-radius: 1.5rem">
+<ul class="pagination pagination-sm no-margin pull-right shadow-100 paginator-border">
     <!-- Previous Page Link -->
     @if ($paginator->onFirstPage())
     <li class="page-item previous disabled"><span class="page-link"></span></li>
@@ -8,7 +8,7 @@
 
     @if(! empty($elements))
     @foreach ($elements as $element)
-        <!-- "Three Dots" Separator -->
+        <!-- "Three Dots" Separator pagination-->
         @if (is_string($element))
         <li class="page-item disabled"><span class="page-link">{{ $element }}</span></li>
         @endif
@@ -33,3 +33,8 @@
     <li class="page-item next disabled"><span class="page-link"></span></li>
     @endif
 </ul>
+<style nonce="{{csp_nonce()}}">
+    .paginator-border {
+        border-radius: 1.5rem;
+    }
+</style>

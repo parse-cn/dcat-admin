@@ -420,7 +420,7 @@ HTML;
         }
 
         return <<<HTML
-<span style="cursor: pointer" data-toggle="modal" data-target="#{$this->id()}">{$button}</span>
+<span class="clickable" data-toggle="modal" data-target="#{$this->id()}">{$button}</span>
 HTML;
     }
 }

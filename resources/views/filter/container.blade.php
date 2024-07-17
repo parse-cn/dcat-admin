@@ -1,4 +1,4 @@
-<style>
+<style nonce="{{ csp_nonce() }}">
     .filter-box {
         border-top: 1px solid #eee;
         margin-top: 10px;
@@ -8,7 +8,7 @@
 </style>
 
 <div class="filter-box shadow-0 card mb-0 {{ $expand ? '' : 'd-none' }} {{$containerClass}}">
-    <div class="card-body" style="{!! $style !!}"  id="{{ $filterID }}">
+    <div class="card-body"  id="{{ $filterID }}">
         <form action="{!! $action !!}" class="form-horizontal grid-filter-form" pjax-container method="get">
             <div class="row mb-0">
                 @foreach($layout->columns() as $column)
@@ -17,7 +17,7 @@
                     @endforeach
                 @endforeach
 
-                <button class="btn btn-primary btn-sm btn-mini submit" style="margin-left: 12px">
+                <button class="btn btn-primary btn-sm btn-mini submit ml-1" >
                     <i class="feather icon-search"></i><span class="d-none d-sm-inline">&nbsp;&nbsp;{{ trans('admin.search') }}</span>
                 </button>
 

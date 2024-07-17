@@ -86,9 +86,8 @@ class Paginator implements Renderable
             return [$key => "<b>$parameter</b>"];
         });
 
-        $color = Admin::color()->dark80();
 
-        return "<span class='d-none d-sm-inline' style=\"line-height:33px;color:{$color}\">".trans('admin.pagination.range', $parameters->all()).'</span>';
+        return "<span class='d-none d-sm-inline paginator-font'>" .trans('admin.pagination.range', $parameters->all()).'</span>';
     }
 
     /**

@@ -178,7 +178,7 @@ class Tools implements Renderable
         $text = trans('admin.list');
 
         return <<<EOT
-<div class="btn-group pull-right" style="margin-right: 5px">
+<div class="btn-group pull-right mt-5p">
     <a href="{$this->getListPath()}" class="btn btn-sm btn-primary "><i class="feather icon-list"></i><span class="d-none d-sm-inline">&nbsp;$text</span></a>
 </div>
 EOT;
@@ -194,7 +194,7 @@ EOT;
         $view = trans('admin.view');
 
         return <<<HTML
-<div class="btn-group pull-right" style="margin-right: 5px">
+<div class="btn-group pull-right mt-5p">
     <a href="{$this->getViewPath()}" class="btn btn-sm btn-primary">
         <i class="feather icon-eye"></i><span class="d-none d-sm-inline"> {$view}</span>
     </a>
@@ -212,7 +212,7 @@ HTML;
         $delete = trans('admin.delete');
 
         return <<<HTML
-<div class="btn-group pull-right" style="margin-right: 5px">
+<div class="btn-group pull-right mt-5p">
     <a class="btn btn-sm btn-white" data-action="delete" data-url="{$this->getDeletePath()}" data-redirect="{$this->getListPath()}">
         <i class="feather icon-trash"></i><span class="d-none d-sm-inline"> {$delete}</span>
     </a>

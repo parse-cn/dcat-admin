@@ -518,7 +518,7 @@ JS;
             $height .= 'px';
         }
 
-        $this->appendHtmlAttribute('style', "min-height:{$height};");
+//        $this->appendHtmlAttribute('style', "min-height:{$height};");
     }
 
     /**

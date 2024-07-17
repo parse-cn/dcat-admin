@@ -1,6 +1,6 @@
 <div class="box-footer">
 
-    <div class="col-md-{{$width['label']}} d-md-block" style="display: none"></div>
+    <div class="col-md-{{$width['label']}} d-md-block d-none"></div>
 
     <div class="col-md-{{$width['field']}}">
 
@@ -10,7 +10,7 @@
             </div>
 
             @if($checkboxes)
-                <div class="pull-right d-md-flex" style="margin:10px 15px 0 0;display: none">{!! $checkboxes !!}</div>
+                <div class="pull-right d-md-flex checkbox-style">{!! $checkboxes !!}</div>
             @endif
 
         @endif

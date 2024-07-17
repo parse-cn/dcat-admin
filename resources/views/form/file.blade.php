@@ -38,9 +38,9 @@
                     <p>{{trans('admin.uploader.drag_file')}}</p>
                 </div>
             </div>
-            <div class="statusBar" style="display:none;">
+            <div class="statusBar d-none">
                 <div class="upload-progress progress progress-bar-primary pull-left">
-                    <div class="progress-bar progress-bar-striped active" style="line-height:18px">0%</div>
+                    <div class="progress-bar progress-bar-striped active line-height-18">0%</div>
                 </div>
                 <div class="info"></div>
                 <div class="btns">

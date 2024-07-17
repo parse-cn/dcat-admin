@@ -243,7 +243,7 @@ HTML;
             $attributes['href'] = $href;
         }
 
-        $this->defaultHtmlAttribute('style', 'cursor: pointer;');
+//        $this->defaultHtmlAttribute('style', 'cursor: pointer;');
         $this->setHtmlAttribute($attributes);
     }
 

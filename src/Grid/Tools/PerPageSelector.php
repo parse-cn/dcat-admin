@@ -86,7 +86,7 @@ class PerPageSelector implements Renderable
             ->render();
 
         return <<<EOT
-<label class="pull-right d-none d-sm-inline per-pages-selector" style="margin-right: 10px">
+<label class="pull-right d-none d-sm-inline per-pages-selector mr-1">
     $dropdown
 </label>
 EOT;

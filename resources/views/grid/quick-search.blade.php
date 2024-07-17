@@ -1,4 +1,4 @@
-<style {!! \Dcat\Admin\Support\Helper::csp_nonce() !!}>
+<style nonce="{{ csp_nonce() }}">
     ::-ms-clear, ::-ms-reveal {
         display: none;
     }

@@ -126,7 +126,7 @@ class Asset
         ],
         '@webuploader'                  => [
             'js'  => [
-                '@admin/dcat/plugins/webuploader/webuploader.min.js',
+                '@admin/dcat/plugins/webuploader/webuploader.js',
                 '@admin/dcat/extra/upload.js',
             ],
             'css' => '@admin/dcat/extra/upload.css',
@@ -690,7 +690,7 @@ class Asset
             }
 
             foreach ((array)$paths as $path) {
-                $html .= "<link rel=\"stylesheet\" href=\"{$this->withVersionQuery($path)}\">";
+                $html .= "<link nonce=\"{$this->csp_nonce()}\" rel=\"stylesheet\" href=\"{$this->withVersionQuery($path)}\">";
             }
         }
 
