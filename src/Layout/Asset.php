@@ -116,9 +116,9 @@ class Asset
                 '@admin/dcat/plugins/moment-timezone/moment-timezone-with-data.min.js',
             ],
         ],
-        '@jstree'                       => [
-            'js'  => '@admin/dcat/plugins/jstree/jstree.min.js',
-            'css' => '@admin/dcat/plugins/jstree/themes/default/style.min.css',
+        '@jstree' => [
+            'js'  => '@admin/dcat/plugins/jstree-theme/jstree.min.js',
+            'css' => '@admin/dcat/plugins/jstree-theme/themes/proton/style.min.css',
         ],
         '@switchery'                    => [
             'js'  => '@admin/dcat/plugins/switchery/switchery.min.js',

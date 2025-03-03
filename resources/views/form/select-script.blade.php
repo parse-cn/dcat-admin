@@ -1,7 +1,7 @@
 
 @include('admin::scripts.select')
 
-<script require="@select2?lang={{ config('app.locale') === 'en' ? '' : str_replace('_', '-', config('app.locale')) }}" init="{!! $selector !!}">
+<script nonce="{{ csp_nonce() }}" require="@select2?lang={{ config('app.locale') === 'en' ? '' : str_replace('_', '-', config('app.locale')) }}" init="{!! $selector !!}">
     var configs = {!! admin_javascript_json($configs) !!};
 
     @yield('admin.select-ajax')

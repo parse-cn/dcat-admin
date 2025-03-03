@@ -18,14 +18,10 @@ class Label extends AbstractDisplayer
         $original = $this->column->getOriginal();
         $defaultStyle = is_array($style) ? ($style['default'] ?? 'default') : 'default';
 
-        $background = $this->formatStyle(
-            is_array($style) ?
-                (is_scalar($original) ? ($style[$original] ?? $defaultStyle) : current($style))
-                : $style
-        );
+        $background = 'bg-'.$style;
 
         return collect($value)->map(function ($name) use ($background) {
-            return "<span class='{$this->baseClass}' {$background}>$name</span>";
+            return "<span class='{$this->baseClass} {$background}'>$name</span>";
         })->implode(' ');
     }
 

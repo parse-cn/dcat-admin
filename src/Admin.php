@@ -212,6 +212,7 @@ class Admin
     public static function section(Closure $builder = null)
     {
         $manager = app('admin.sections');
+        dd($manager);
 
         $builder && $builder($manager);
 

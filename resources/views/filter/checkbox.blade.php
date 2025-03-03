@@ -6,8 +6,13 @@
         $checkbox->check(request($name, is_null($value) ? [] : $value))->circle(false);
 
     @endphp
+    <style nonce="{{ csp_nonce() }}">
+        .checkbox-label {
+            margin-right: 15px;
+        }
+    </style>
     @if($showLabel)
-        <div class="pull-left text-capitalize" style="margin-top: 6px;margin-right: 15px;">
+        <div class="pull-left text-capitalize checkbox-label">
             <b>{{ $label }}</b>
         </div>
         <div class="pull-left">

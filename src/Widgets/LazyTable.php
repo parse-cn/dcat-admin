@@ -117,7 +117,10 @@ class LazyTable extends Widget
 
     protected function addScript()
     {
+        $nonce = csp_nonce();
+        
         $this->script = <<<JS
+<script nonce="{$nonce}">
 Dcat.init('{$this->getElementSelector()}', function (\$this) {
     Dcat.grid.AsyncTable({container: \$this})
 
@@ -125,6 +128,7 @@ Dcat.init('{$this->getElementSelector()}', function (\$this) {
 
     {$this->getLoadScript()}
 });
+</script>
 JS;
     }
 

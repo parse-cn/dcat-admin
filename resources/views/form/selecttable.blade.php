@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<script require="@select-table" init="{!! $selector !!}">
+<script require="@select-table" init="{!! $selector !!}" nonce="{{ csp_nonce() }}">
     var dialogId = $this.parent().find('{!! $dialogSelector !!}').attr('id');
     var $input = $(this).find('input');
 

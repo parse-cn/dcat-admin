@@ -27,9 +27,11 @@
         $input = $this.find('.hidden-input'),
         opts = {!! admin_javascript_json($options) !!},
         parents = {!! json_encode($parents) !!};
-
     opts.core = opts.core || {};
     opts.core.data = {!! json_encode($nodes) !!};
+
+    console.log(opts);
+    
 
     $this.find('input[value=1]').on("click", function () {
         $(this).parents('.jstree-wrapper').find('.da-tree').jstree($(this).prop("checked") ? "check_all" : "uncheck_all");
@@ -52,6 +54,7 @@
 
         selected.length && $input.val(selected.join(','));
     }).on("loaded.jstree", function () {
+        
         @if($expand) $(this).jstree('open_all'); @endif
     }).jstree(opts);
 </script>

@@ -46,7 +46,7 @@ class Menu
         if (! admin_has_default_section(Admin::SECTION['LEFT_SIDEBAR_MENU'])) {
             admin_inject_default_section(Admin::SECTION['LEFT_SIDEBAR_MENU'], function () {
                 $menuModel = config('admin.database.menu_model');
-
+                
                 return $this->toHtml((new $menuModel())->allNodes()->toArray());
             });
         }
@@ -206,7 +206,6 @@ class Menu
         if (! $user || ! method_exists($user, 'canSeeMenu')) {
             return true;
         }
-
         return $user->canSeeMenu($item);
     }
 
@@ -221,6 +220,7 @@ class Menu
         $permissionIds = $item['permission_id'] ?? null;
         $roles = array_column(Helper::array($item['roles'] ?? []), 'slug');
         $permissions = array_column(Helper::array($item['permissions'] ?? []), 'slug');
+
 
         if (! $permissionIds && ! $roles && ! $permissions) {
             return true;
