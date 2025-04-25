@@ -4,7 +4,7 @@
     }
 
     .quick-search-form .table-filter label {
-        width: {{ $width }}rem;
+        width: {{ $width ?? 10 }}rem;
     }
 </style>
 

@@ -371,7 +371,10 @@ HTML;
 
         return $this->unescape()->as(function ($value) use ($self, $style) {
             [$class, $background] = $self->formatStyle($style);
-
+            if($style){
+                $class = $style;
+                $background = '';
+            }
             return collect($value)->map(function ($name) use ($class, $background) {
                 return "<span class='badge bg-{$class}' $background>$name</span>";
             })->implode(' ');

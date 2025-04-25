@@ -103,7 +103,7 @@ JS;
 
         return $this->grid->tools()->format(
             <<<EOT
-<div class="btn-group dropdown" style="margin-right:3px">
+<div class="btn-group dropdown">
     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
         <i class="feather icon-download"></i>
         <span class="d-none d-sm-inline">&nbsp;{$export}&nbsp;</span>

@@ -3,7 +3,7 @@
         <div class="table-responsive">
             <div class="top d-block clearfix p-0">
                 @if(!empty($title))
-                    <h4 class="pull-left" style="margin:5px 10px 0;">
+                    <h4 class="pull-left title-margin">
                         {!! $title !!}&nbsp;
                         @if(!empty($description))
                             <small>{!! $description!!}</small>

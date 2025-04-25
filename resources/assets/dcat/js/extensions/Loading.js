@@ -1,8 +1,8 @@
 
-let tpl = '<div class="dcat-loading d-flex items-center align-items-center justify-content-center pin" style="{style}">{svg}</div>',
+let tpl = '<div class="dcat-loading d-flex items-center align-items-center justify-content-center pin">{svg}</div>',
     loading = '.dcat-loading',
     LOADING_SVG = [
-        '<svg xmlns="http://www.w3.org/2000/svg" class="mx-auto block" style="width:{width};{svg_style}" viewBox="0 0 120 30" fill="{color}"><circle cx="15" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"/><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="60" cy="15" r="9" fill-opacity="0.3"><animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="105" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle></svg>',
+        '<svg xmlns="http://www.w3.org/2000/svg" class="mx-auto block"  viewBox="0 0 120 30" fill="{color}"><circle cx="15" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"/><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="60" cy="15" r="9" fill-opacity="0.3"><animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite" /></circle><circle cx="105" cy="15" r="15"><animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite" /><animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite" /></circle></svg>',
     ];
 
 class Loading {
@@ -13,12 +13,11 @@ class Loading {
             width: '52px',
             color: Dcat.color.dark60,
             background: '#fff',
-            style: '',
             svg: LOADING_SVG[0]
         }, options);
 
         let _this = this,
-            defStyle = 'position:absolute;',
+            // defStyle = 'position:absolute;',
             content;
 
         _this.$container = $(options.container);
@@ -29,7 +28,7 @@ class Loading {
                 .replace('{color}', options.color)
                 .replace('{color}', options.color)
                 .replace('{width}', options.width)
-                .replace('{style}', `${defStyle}background:${options.background};z-index:${options.zIndex};${options.style}`)
+            // .replace('{style}', `${defStyle}background:${options.background};z-index:${options.zIndex};${options.style}`)
         );
         content.appendTo(_this.$container);
     }
@@ -62,9 +61,9 @@ function extend(Dcat) {
 
         var win = $(window),
             // 容器
-            $container = $('<div class="dcat-loading" style="z-index:'+options.zIndex+';width:300px;position:fixed"></div>'),
+            $container = $('<div class="dcat-loading" style="z-index:' + options.zIndex + ';width:300px;position:fixed"></div>'),
             // 遮罩层直接沿用layer
-            shadow = $('<div class="layui-layer-shade dcat-loading" style="z-index:'+(options.zIndex-2)+'; background-color:'+options.shade+'"></div>');
+            shadow = $('<div class="layui-layer-shade dcat-loading" style="z-index:' + (options.zIndex - 2) + '; background-color:' + options.shade + '"></div>');
 
         $container.appendTo('body');
 
@@ -74,8 +73,8 @@ function extend(Dcat) {
 
         function resize() {
             $container.css({
-                left: (win.width() - 300)/2,
-                top: (win.height() - options.top)/2
+                left: (win.width() - 300) / 2,
+                top: (win.height() - options.top) / 2
             });
         }
         // 自适应窗口大小
@@ -104,7 +103,7 @@ function extend(Dcat) {
             content;
 
         if (start === false) {
-            if (! loadingId) {
+            if (!loadingId) {
                 return $this;
             }
 
@@ -125,7 +124,7 @@ function extend(Dcat) {
 
         content = $this.html();
 
-        loadingId = 'ld-'+Dcat.helpers.random();
+        loadingId = 'ld-' + Dcat.helpers.random();
 
         let loading = `<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>`;
         let btnClass = ['btn', 'layui-layer-btn0', 'layui-layer-btn1'];
