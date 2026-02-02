@@ -3,8 +3,8 @@
         display: none;
     }
 
-    .quick-search-form .table-filter label {
-        width: {{ $width ?? 10 }}rem;
+    .quick-search-form .table-filter label{
+        width: {{ $width ?? 10 }}rem !important;
     }
 </style>
 

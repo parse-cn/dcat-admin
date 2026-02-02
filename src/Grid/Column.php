@@ -25,7 +25,7 @@ use Illuminate\Support\Traits\Macroable;
  * @method $this label($style = 'primary', int $max = null)
  * @method $this button($style = 'success');
  * @method $this link($href = '', $target = '_blank');
- * @method $this badge($style = 'primary', int $max = null);
+ * @method $this label($style = 'primary', int $max = null);
  * @method $this progressBar($style = 'primary', $size = 'sm', $max = 100)
  * @method $this checkbox($options = [], $refresh = false)
  * @method $this radio($options = [], $refresh = false)
