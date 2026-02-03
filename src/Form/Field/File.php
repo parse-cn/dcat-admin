@@ -68,10 +68,10 @@ class File extends Field implements UploadFieldInterface
         $requiredIf = null;
 
         $fileLimit = $this->options['fileNumLimit'] ?? 1;
-        if (!empty($value) && $fileLimit > 1){
-            $rules[$this->column][] = function($atribute,$value,$fail)use($fileLimit){
+        if (!empty($value) && $fileLimit > 1) {
+            $rules[$this->column][] = function ($atribute, $value, $fail) use ($fileLimit) {
                 $value = array_filter(is_array($value) ? $value : explode(',', $value));
-                if (count($value) > $fileLimit ) {
+                if (count($value) > $fileLimit) {
                     $fail(trans('admin.uploader.max_file_limit', ['attribute' => $this->label, 'max' => $fileLimit]));
                 }
             };

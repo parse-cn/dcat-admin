@@ -95,7 +95,6 @@ class Permission
         if (Helper::isAjaxRequest()) {
             abort(403, trans('admin.deny'));
         }
-
         admin_exit(
             Content::make()->withError(trans('admin.deny'))
         );

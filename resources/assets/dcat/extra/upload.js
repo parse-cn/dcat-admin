@@ -128,7 +128,7 @@ import AddUploadedFile from './Upload/AddUploadedFile'
             // 添加的文件总大小
             _this.fileSize = 0;
 
-            if (typeof options.upload.formData._id === "undefined" || ! options.upload.formData._id) {
+            if (typeof options.upload.formData._id === "undefined" || !options.upload.formData._id) {
                 options.upload.formData._id = _this.updateColumn + Dcat.helpers.random();
             }
         }
@@ -160,7 +160,7 @@ import AddUploadedFile from './Upload/AddUploadedFile'
             _this.$progress = $progress;
             _this.$infoBox = $info;
 
-            if (options.upload.fileNumLimit > 1 && ! options.disabled) {
+            if (options.upload.fileNumLimit > 1 && !options.disabled) {
                 // 添加“添加文件”的按钮，
                 uploader.addButton({
                     id: options.addFileButton,
@@ -224,7 +224,7 @@ import AddUploadedFile from './Upload/AddUploadedFile'
                 _this.fileCount--;
                 _this.fileSize -= file.size;
 
-                if (! _this.fileCount && !Dcat.helpers.len(_this.formFiles)) {
+                if (!_this.fileCount && !Dcat.helpers.len(_this.formFiles)) {
                     _this.status.switch('pending');
                 }
 
@@ -246,7 +246,7 @@ import AddUploadedFile from './Upload/AddUploadedFile'
                     case 'stopUpload':
                         _this.status.switch('paused');
                         break;
-                    case  'uploadAccept':
+                    case 'uploadAccept':
                         if (_this._uploadAccept(obj, reason) === false) {
                             return false;
                         }
@@ -261,7 +261,7 @@ import AddUploadedFile from './Upload/AddUploadedFile'
                         Dcat.error(_this.lang.trans('Q_TYPE_DENIED'));
                         break;
                     case 'Q_EXCEED_NUM_LIMIT':
-                        Dcat.error(_this.lang.trans('Q_EXCEED_NUM_LIMIT', {num: options.upload.fileNumLimit}));
+                        Dcat.error(_this.lang.trans('Q_EXCEED_NUM_LIMIT', { num: options.upload.fileNumLimit }));
                         break;
                     case 'F_EXCEED_SIZE':
                         Dcat.error(_this.lang.trans('F_EXCEED_SIZE'));
@@ -319,7 +319,7 @@ import AddUploadedFile from './Upload/AddUploadedFile'
                 options = _this.options;
 
             // 上传失败，返回false
-            if (! reason || ! reason.status) {
+            if (!reason || !reason.status) {
                 _this.helper.showError(reason);
 
                 _this.faildFiles[obj.file.id] = obj.file;
@@ -344,7 +344,7 @@ import AddUploadedFile from './Upload/AddUploadedFile'
 
             let $li = _this.getFileView(obj.file.id);
 
-            if (! _this.isImage()) {
+            if (!_this.isImage()) {
                 $li.find('.file-action').hide();
                 $li.find('[data-file-act="delete"]').show();
             }
